@@ -17,7 +17,7 @@ Thanks for your interest. This is a small project; the maintainer ships intentio
 
 1. Fork, create a branch.
 2. Make focused changes (one concern per PR).
-3. Run `rg -P '[가-힣]' .` — should return nothing.
+3. Run `rg -P '[^\x00-\x7F]' .` — should return nothing.
 4. Open a PR. Link to any related issue.
 5. Expect feedback in a few days; ping politely if a week passes.
 

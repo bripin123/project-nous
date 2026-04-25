@@ -78,7 +78,7 @@ If the user says "Initiate a Next.js project":
 | `{{LAYER_1_STATUS}}` | `✅ ACTIVE` | AGENTS.md |
 | `{{LAYER_2_STATUS}}` | `✅ ACTIVE` | AGENTS.md |
 | `{{LAYER_3_STATUS}}` | `✅ ACTIVE` | AGENTS.md |
-| `__VAULT_PATH__` | Vault-relative path (the part after `PARADocumentSystem/` from `{{PROJECT_ROOT}}`, e.g., `--1-PROJECTS/1-2-HAIKorea/INHART_Book_Translation`) | 00-Dashboard.md |
+| `__VAULT_PATH__` | Vault-relative path (the part after `my-local-repo/` from `{{PROJECT_ROOT}}`, e.g., `projects/client-domain-app`) | 00-Dashboard.md |
 
 **Note**: `<!-- BRIEFING_START -->` / `<!-- BRIEFING_END -->` in AGENTS.md are HTML comment markers, not placeholders. Do not replace them; write the contents between them in Step 5.
 
@@ -228,7 +228,7 @@ The `00-Dashboard.md` that comes with `_template` is an inactive stub. Activate 
 ```
 >
 > **Deployment Setup**: Change `__VAULT_PATH__` in all `FROM` paths below to...
-> Example: `__VAULT_PATH__` → `--1-PROJECTS/MyProject`
+> Example: `__VAULT_PATH__` → `projects/MyProject`
 ```
 Delete these 3 lines entirely.
 

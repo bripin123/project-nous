@@ -12,7 +12,7 @@ created: 2026-04-16
 > **Required Plugin**: Dataview (Settings > Enable JavaScript Queries ON)
 >
 > **Deployment Setup**: Change `__VAULT_PATH__` in all `FROM` paths below to the vault-relative path of this project.
-> Example: `__VAULT_PATH__` → `--1-PROJECTS/MyProject`
+> Example: `__VAULT_PATH__` → `projects/MyProject`
 
 ---
 
