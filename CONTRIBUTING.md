@@ -21,6 +21,10 @@ Thanks for your interest. This is a small project; the maintainer ships intentio
 4. Open a PR. Link to any related issue.
 5. Expect feedback in a few days; ping politely if a week passes.
 
+## Contact
+
+For non-public matters — security disclosures, partnership inquiries, or anything not appropriate for a public issue — reach the maintainer at **heesong.koh@hotmail.com**. For everything else, please open a GitHub issue or discussion; public discussion is preferred.
+
 ## Code of Conduct
 
 By participating, you agree to follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
