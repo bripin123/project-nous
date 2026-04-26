@@ -27,6 +27,8 @@ A first session takes about 10 minutes end-to-end.
 - One of: **[Claude Code](https://docs.claude.com/en/docs/claude-code)**, **[Codex CLI](https://github.com/openai/codex)**, or **[Gemini CLI](https://github.com/google-gemini/gemini-cli)**
 - macOS or Linux (Windows variants of MCP configs are included as `_win` files)
 
+**Recommended:** run the CLI inside an IDE terminal (VS Code, Cursor, JetBrains, etc.), or install the CLI's official IDE extension. Keeping the agent and file edits in one window makes the `/start` → work → `/sync` loop noticeably smoother — you can review the agent's diffs in the editor while the conversation continues in the terminal pane.
+
 ### Step 1 — Install the RAG-Memory MCP server
 
 ```bash
