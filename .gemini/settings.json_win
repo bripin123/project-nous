@@ -1,0 +1,93 @@
+{
+  "context": {
+    "fileName": [
+      "AGENTS.md",
+      "GEMINI.md"
+    ]
+  },
+  "hooks": {
+    "BeforeTool": [
+      {
+        "matcher": "run_shell_command",
+        "hooks": [
+          {
+            "name": "check-careful",
+            "type": "command",
+            "command": "bash \".gemini/hooks/check-careful.sh\"",
+            "description": "Blocks destructive shell commands until the agent gets explicit confirmation."
+          }
+        ]
+      },
+      {
+        "matcher": "write_file|replace",
+        "hooks": [
+          {
+            "name": "check-freeze",
+            "type": "command",
+            "command": "bash \".gemini/hooks/check-freeze.sh\"",
+            "description": "Prevents edits outside the active freeze directory."
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "write_file|replace",
+        "hooks": [
+          {
+            "name": "log-file-change",
+            "type": "command",
+            "command": "python3 \".gemini/hooks/log-file-change.py\"",
+            "description": "Records file edits into the daily log."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "name": "reinject-context",
+            "type": "command",
+            "command": "python3 \".gemini/hooks/reinject-context.py\"",
+            "description": "Injects a compact project snapshot at session start."
+          }
+        ]
+      }
+    ]
+  },
+  "mcpServers": {
+    "MCP_DOCKER": {
+      "command": "docker",
+      "args": [
+        "mcp",
+        "gateway",
+        "run"
+      ]
+    },
+    "pyhub-mcptools": {
+      "command": "E:\\development\\mcptools\\pyhub.mcptools\\pyhub.mcptools.exe",
+      "args": [
+        "run",
+        "stdio"
+      ],
+      "env": {}
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "chrome-devtools-mcp@latest"
+      ]
+    },
+    "rag-memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "rag-memory-epf-mcp@latest"
+      ],
+      "env": {
+        "DB_FILE_PATH": "G:\\My Drive\\PARADocumentSystem\\--0-CollectLOG\\Ultimate_AI_Personal_Assistant\\.memory\\rag-memory.db"
+      }
+    }
+  }
+}

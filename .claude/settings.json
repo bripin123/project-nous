@@ -1,0 +1,119 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__rag-memory__createEntities",
+      "mcp__rag-memory__createRelations",
+      "mcp__rag-memory__addObservations",
+      "mcp__rag-memory__deleteEntities",
+      "mcp__rag-memory__deleteRelations",
+      "mcp__rag-memory__deleteObservations",
+      "mcp__rag-memory__readGraph",
+      "mcp__rag-memory__searchNodes",
+      "mcp__rag-memory__openNodes",
+      "mcp__rag-memory__getKnowledgeGraphStats",
+      "mcp__rag-memory__hybridSearch",
+      "mcp__rag-memory__listDocuments",
+      "mcp__rag-memory__deleteDocuments",
+      "mcp__rag-memory__storeDocument",
+      "mcp__rag-memory__chunkDocument",
+      "mcp__rag-memory__embedChunks",
+      "mcp__rag-memory__linkEntitiesToDocument",
+      "Bash(test:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(sed:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(ln:*)",
+      "Bash(chmod:*)",
+      "Bash(python3:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "MCP_DOCKER",
+    "chrome-devtools",
+    "mcp-obsidian",
+    "notebooklm-mcp",
+    "gemini-cli",
+    "codex-tool",
+    "rag-memory"
+  ],
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/check-careful.sh\""
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/check-freeze.sh\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/log-file-change.py\""
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/reinject-context.py\""
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/memory-sync.sh\" pull"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/memory-sync.sh\" push"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "model": "claude-sonnet-4-6",
+            "prompt": "Review whether the AI completed the user's EXPLICIT requests. Rules: (1) Only flag as incomplete if the user asked for something specific and it was NOT done. (2) If the AI answered a question or provided information, that counts as complete. (3) If the AI is waiting for user input/decision, that is COMPLETE - do not flag. (4) Conversations, explanations, and status updates are always complete. (5) Only flag code errors if the AI wrote code and there are obvious bugs. Respond {\"ok\": true} unless there is a clearly unfinished explicit task."
+          }
+        ]
+      }
+    ]
+  }
+}

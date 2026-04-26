@@ -1,0 +1,82 @@
+# Codex CLI Project-Scoped Configuration
+# Reserved input adapters live in `.codex/commands/`.
+# Shared procedure bodies remain in `AGENTS.md` and `docs/protocols/`.
+# NOTE: Codex reads config from `$env:CODEX_HOME/config.toml` (default: `~/.codex/config.toml`).
+# This file configures MCP servers for Codex. (Codex does not auto-import `.mcp.json`.)
+
+[mcp_servers.MCP_DOCKER]
+command = 'docker'
+args = ['mcp', 'gateway', 'run']
+
+[mcp_servers.chrome-devtools]
+command = 'C:\Program Files\nodejs\npx.cmd'
+args = ['-y', 'chrome-devtools-mcp@latest']
+
+[mcp_servers.notebooklm-mcp]
+command = "/opt/homebrew/bin/uvx"
+args = ["--from", "notebooklm-mcp-cli", "notebooklm-mcp"]
+
+[mcp_servers.mcp-obsidian]
+command = "/Users/heesongkoh/.nvm/versions/node/v24.12.0/bin/npx"
+args = [
+  "-y",
+  "@mauricio.wolff/mcp-obsidian@latest",
+  "/path/to/your/local/repo"
+]
+
+[mcp_servers.mcp-obsidian.env]
+PATH = "/Users/heesongkoh/.nvm/versions/node/v24.12.0/bin:/usr/local/bin:/usr/bin:/bin"
+
+[mcp_servers.gemini-cli]
+command = "/Users/heesongkoh/.nvm/versions/node/v24.12.0/bin/npx"
+args = ["-y", "mcp-gemini-cli", "--allow-npx"]
+
+[mcp_servers.gemini-cli.env]
+PATH = "/Users/heesongkoh/.nvm/versions/node/v24.12.0/bin:/usr/local/bin:/usr/bin:/bin"
+
+[mcp_servers.codex-tool]
+command = "codex"
+args = ["mcp-server"]
+
+[mcp_servers.codex-tool.env]
+PATH = "/Users/heesongkoh/.nvm/versions/node/v24.12.0/bin:/usr/local/bin:/usr/bin:/bin"
+
+[mcp_servers.rag-memory]
+command = "/Users/heesongkoh/.nvm/versions/node/v24.12.0/bin/npx"
+args = ["-y", "rag-memory-epf-mcp@latest"]
+alwaysAllow = [
+  "createEntities",
+  "createRelations",
+  "addObservations",
+  "deleteEntities",
+  "deleteObservations",
+  "deleteRelations",
+  "updateRelations",
+  "readGraph",
+  "searchNodes",
+  "openNodes",
+  "getNeighbors",
+  "getKnowledgeGraphStats",
+  "exportGraph",
+  "importGraph",
+  "hybridSearch",
+  "getDetailedContext",
+  "embedAllEntities",
+  "storeDocument",
+  "chunkDocument",
+  "embedChunks",
+  "extractTerms",
+  "deleteDocuments",
+  "listDocuments",
+  "linkEntitiesToDocument",
+  "getGraphMetrics",
+  "detectCommunities",
+  "analyzeGraphStructure",
+  "getMigrationStatus",
+  "runMigrations",
+  "rollbackMigration"
+]
+
+[mcp_servers.rag-memory.env]
+DB_FILE_PATH = "/path/to/your/local/repo/--0-CollectLOG/Ultimate_AI_Personal_Assistant/.memory/rag-memory.db"
+PATH = "/Users/heesongkoh/.nvm/versions/node/v24.12.0/bin:/usr/local/bin:/usr/bin:/bin"
