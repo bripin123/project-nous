@@ -173,7 +173,7 @@ These are enforced as part of the agent's standing instructions, not as docs.
 
 ## RAG-Memory Engine
 
-project-nous depends on **[`rag-memory-epf-mcp`](https://www.npmjs.com/package/rag-memory-epf-mcp) v3.3.0** — a single MCP server exposing **30 tools** across four capability layers. This is the persistence engine that makes the project folder behave as a queryable intelligence rather than a pile of files.
+project-nous depends on **[`rag-memory-epf-mcp`](https://www.npmjs.com/package/rag-memory-epf-mcp) v3.3.2** — a single MCP server exposing **30 tools** across four capability layers. This is the persistence engine that makes the project folder behave as a queryable intelligence rather than a pile of files.
 
 ### Hybrid Search (not keyword matching)
 
@@ -200,7 +200,7 @@ Ten tools manage a typed graph that grows alongside the project:
 
 ### Graph Analytics (powered by graphology)
 
-Three structural-analysis tools added in v3.3.0:
+Three structural-analysis tools added in v3.3.2:
 
 - **`getGraphMetrics`** — centrality scores per entity (degree, betweenness, PageRank). Identifies bridge entities and orphan nodes.
 - **`detectCommunities`** — Louvain clustering with modularity score. Surfaces topic groups and isolated clusters.
@@ -237,7 +237,7 @@ Mainstream memory MCPs expose ~10 tools focused on key/value note-taking. projec
 
 Two slash commands carry the framework's day-to-day discipline. They are symmetrical — Step *N* of `/sync` writes what Step *N* of `/start` will read tomorrow.
 
-### `/start` — restore (≈5 seconds)
+### `/start` — restore 
 
 1. Read `decisions/current-focus.md` (direction, blockers, next actions).
 2. Read the latest daily log under `logs/YYYY-MM/`.
@@ -248,7 +248,7 @@ Two slash commands carry the framework's day-to-day discipline. They are symmetr
 
 The agent then reports current state in first-person ("I am this project, my current direction is …") rather than as an external summary.
 
-### `/sync` — persist (≈1 minute)
+### `/sync` — persist 
 
 1. Update `current-focus.md` with what changed and the new next actions.
 2. Append a daily log entry.
