@@ -1,0 +1,24 @@
+# RAG-Memory local DB (per-project, never committed)
+.memory/
+*.db
+*.db-shm
+*.db-wal
+
+# Secrets and env
+.env
+.env.local
+*.pem
+*.key
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Node / Python (in case a future skill uses them)
+node_modules/
+__pycache__/
+*.pyc
+.venv/
