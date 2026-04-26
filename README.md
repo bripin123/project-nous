@@ -23,19 +23,28 @@ A first session takes about 10 minutes end-to-end.
 
 ### Prerequisites
 
-- **Node.js 18+** (for the RAG-Memory MCP server)
+- **nvm + Node 24** (the bundled MCP configs invoke `nvm use 24`)
 - One of: **[Claude Code](https://docs.claude.com/en/docs/claude-code)**, **[Codex CLI](https://github.com/openai/codex)**, or **[Gemini CLI](https://github.com/google-gemini/gemini-cli)**
 - macOS or Linux (Windows variants of MCP configs are included as `_win` files)
 
 **Recommended:** run the CLI inside an IDE terminal (VS Code, Cursor, JetBrains, etc.), or install the CLI's official IDE extension. Keeping the agent and file edits in one window makes the `/start` → work → `/sync` loop noticeably smoother — you can review the agent's diffs in the editor while the conversation continues in the terminal pane.
 
-### Step 1 — Install the RAG-Memory MCP server
+### Step 1 — Install Node 24 + the RAG-Memory MCP server
+
+Make sure Node 24 is available, then install the persistence engine once globally. The bundled MCP configs call it via `npx -y`, which prefers the globally installed copy when the version matches — so a single global install is shared across all your project-nous projects.
 
 ```bash
+# If you don't already have nvm + Node 24:
+nvm install 24
+nvm use 24
+
+# One-time global install of the persistence engine (~1.5 GB; bundles
+# bge-m3 multilingual embeddings via @huggingface/transformers and
+# sqlite-vec/better-sqlite3 native binaries):
 npm install -g rag-memory-epf-mcp
 ```
 
-This is the persistence engine (entity-relation graph + document RAG + analytics). One install is shared across all your project-nous projects; each project keeps its own SQLite database under `.memory/`.
+Each project keeps its own SQLite database under `.memory/` — isolation comes from the per-project `env.DB_FILE_PATH` in the MCP config, not from where the server binary lives. Without a global install, `npx -y` would re-download the ~1.5 GB dependency tree into a new cache slot every time the package version changes.
 
 ### Step 2 — Copy the template into a new project
 
@@ -294,6 +303,19 @@ Workflow scales with task size — chosen before any work begins:
 | Large (architecture change) | **Integrated workflow (full)** | superpowers brainstorm → plan → execute |
 
 ---
+
+## Use Cases
+
+project-nous is project-type-agnostic. Real-world deployments cover:
+
+- **Full-stack development** — web apps, learning management systems, e-commerce, blockchain services. The SDD workflow plus skills like `qa` and `deploy` keep specs, code, and ship-readiness aligned across sessions.
+- **Domain-specific advisory systems** — legal, financial, regulatory compliance assistants where the same documents are queried repeatedly and answers must cite stable evidence. RAG-Memory's hybrid search and chunk-level entity linking are the load-bearing parts here.
+- **Long-form writing** — fiction, memoir, technical documentation. Switches into Writing/Research mode (`writing-research-protocol.md`) with chapter and source tracking.
+- **AI-augmented research and ideation** — brainstorming, multi-source consolidation, decision-record-driven exploration. The `research` skill and the Knowledge Wiki protocol handle ingest → distill cycles.
+- **Polymath workspaces** — many concurrent projects with different agents (Claude / Codex / Gemini) without context bleed between them. Each project folder is its own intelligence; the framework's discipline is the same everywhere.
+- **Business operations** — funding applications, recurring reporting, document workflows where last week's decisions must resurface accurately this week.
+
+The common thread: **work that lives across many sessions**, where "what did we decide and why" matters as much as "what does the code do".
 
 ## How project-nous compares
 
