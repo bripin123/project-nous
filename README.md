@@ -173,7 +173,7 @@ These are enforced as part of the agent's standing instructions, not as docs.
 
 ## RAG-Memory Engine
 
-project-nous depends on **[`rag-memory-epf-mcp`](https://www.npmjs.com/package/rag-memory-epf-mcp) v3.3.2** — a single MCP server exposing **30 tools** across four capability layers. This is the persistence engine that makes the project folder behave as a queryable intelligence rather than a pile of files.
+project-nous depends on **[`rag-memory-epf-mcp`](https://www.npmjs.com/package/rag-memory-epf-mcp) v3.3.6** — a single MCP server exposing **30 tools** across four capability layers. This is the persistence engine that makes the project folder behave as a queryable intelligence rather than a pile of files.
 
 ### Hybrid Search (not keyword matching)
 
