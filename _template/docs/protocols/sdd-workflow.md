@@ -117,6 +117,15 @@ Create the following structure:
 
 Scope Challenge Failure → Re-evaluate after modifying design.
 
+**2d. Domain Modeling (Optional — when the domain is genuinely complex)**:
+
+For complex business domains, consider DDD strategic patterns:
+- **Bounded Context**: define the boundary where this model applies consistently
+- **Aggregate**: identify the cluster of objects that must hold an invariant together + the Root entity
+- **Ubiquitous Language**: align on domain vocabulary → crystallize as RAG-Memory entity types (e.g., STOCK/SIGNAL/STRATEGY)
+
+Skip for CRUD-heavy or simple domains — the overhead exceeds the value.
+
 **Optional Skills**:
 - `/plan-design-review` — Frontend design 0-10 audit
 - `/design-consultation` — Create design system (new frontend)
